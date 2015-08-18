@@ -1,3 +1,7 @@
+/* global WORK */
+/* global MOVE */
+/* global CARRY */
+/* global Game */
 Spawn.prototype.createByRole = function (role)
 {
     if (roles[role])
