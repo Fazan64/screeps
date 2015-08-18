@@ -230,7 +230,7 @@ module.exports = function (spawn)
     // max energy a single creep may cost
     var spawningEnergy = totalEnergy;
     
-    var harvesterBody = generateBody (baseBodies['harvester', spawningEnergy]);
+    var harvesterBody = generateBody (baseBodies['harvester'], spawningEnergy);
     var guardBody = generateBody (baseBodies['guard'], spawningEnergy);
 
     spawnCreepEvery  (spawn, 'harvester', Math.round(LIFETIME / 6), 0, harvesterBody);
