@@ -1,15 +1,3 @@
-Spawn.prototype.createByRole = function (role)
-{
-    if (roles[role])
-    {
-        return this.createCreep (roles[role].body, null, {role : role});   
-    }
-    else
-    {
-        console.log ("Role not found: " + role);
-    }
-};
-
 var roles = require("roles");
 
 for(var name in Game.creeps) 
