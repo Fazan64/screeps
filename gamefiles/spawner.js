@@ -100,7 +100,7 @@ function spawnCreepEvery(spawn, role, interval, stagger, parts)
 function spawnFromQueue(spawn) 
 {
     // Spawn's busy
-    if (!spawn.memory.queue) 
+    if (spawn.spawning) 
         return;
     // Nothing to create, queue's empty
     if (!spawn.memory.queue.length) 
