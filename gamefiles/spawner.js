@@ -236,7 +236,7 @@ module.exports = function (spawn)
     spawnCreepEvery  (spawn, 'harvester', Math.round(LIFETIME / 6), 0, harvesterBody);
     checkCreepSupply (spawn, 'harvester', roleCreeps, 1, harvesterBody);
 
-    spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 300, generateBody (baseBodies['upgrader'], spawningEnergy));
+    spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 100, generateBody (baseBodies['upgrader'], spawningEnergy));
     spawnCreepEvery (spawn, 'builder', LIFETIME / 2, 200, generateBody (baseBodies['builder'], spawningEnergy));
     
     // Make number of guards and number of enemies in the room match
