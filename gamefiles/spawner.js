@@ -8,7 +8,9 @@ function getNameByRole(spawn, role)
     var creeps = Game.creeps;
     
     while (creeps[spawn.room.name + 'X' + role + 'X' + creepIndex]) 
+    {
         creepIndex++;
+    }
     
     return 
     {
