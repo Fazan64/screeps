@@ -1,5 +1,3 @@
-var roles = require("roles");
-
 Spawn.prototype.createByRole = function (role)
 {
     if (roles[role])
@@ -11,6 +9,8 @@ Spawn.prototype.createByRole = function (role)
         console.log ("Role not found: " + role);
     }
 };
+
+var roles = require("roles");
 
 for(var name in Game.creeps) 
 {
@@ -44,4 +44,11 @@ for(var name in Game.creeps)
     }
     
     behaviour(creep);
+}
+
+var spawner = require ('spawner');
+
+for(var spawn in Game.spawns) 
+{
+    spawner (spawn);
 }
