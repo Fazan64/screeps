@@ -2,7 +2,6 @@ module.exports =
 {
     "harvester" : 
     {
-        body : [WORK, CARRY, MOVE],
         behaviour : function (creep)
         {
             if(creep.carry.energy < creep.carryCapacity) 
@@ -21,7 +20,6 @@ module.exports =
     
     "guard" : 
     {
-        body : [ATTACK, ATTACK, TOUGH, MOVE],
         behaviour : function (creep)
         {
             var targets = creep.room.find(FIND_HOSTILE_CREEPS).filter (function (creep) { return creep.owner.username != "Source Keeper" });
@@ -35,7 +33,6 @@ module.exports =
     
     "shooter" : 
     {
-        body : [RANGED_ATTACK, RANGED_ATTACK, ATTACK, TOUGH, MOVE],
         behaviour : function (creep)
         {
             var targets = creep.room.find(FIND_HOSTILE_CREEPS).filter (function (creep) { return creep.owner.username != "Source Keeper" });
@@ -55,7 +52,6 @@ module.exports =
     
     "upgrader" : 
     {
-        body : [WORK, WORK, CARRY, MOVE],
         behaviour : function (creep)
         {
             if(creep.carry.energy < creep.carryCapacity) 
@@ -75,7 +71,6 @@ module.exports =
     
     "builder" : 
     {
-        body : [WORK, WORK, CARRY, MOVE],
         behaviour : function (creep)
         {
             var spawn =  Game.spawns.Spawn1
@@ -98,7 +93,6 @@ module.exports =
     
     "healer" : 
     {
-        body : [HEAL, MOVE],
         behaviour : function (creep)
         {
             // Creeps with health less then maximum
