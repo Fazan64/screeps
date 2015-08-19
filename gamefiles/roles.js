@@ -46,7 +46,7 @@ module.exports =
             if(creep.carry.energy < creep.carryCapacity) 
             {
             	var sources = creep.room.find(FIND_SOURCES);
-                if (sources)
+                if (sources.length)
                 {
                     var targetSource = findUnoccupiedSource (sources);
                     if (targetSource)
