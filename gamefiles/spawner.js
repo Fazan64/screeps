@@ -253,10 +253,10 @@ module.exports = function (spawn)
     spawnCreepEvery  (spawn, 'harvester', Math.round(LIFETIME / 6), 0, harvesterBody);
     checkCreepSupply (spawn, 'harvester', roleCreeps,               3, harvesterBody);
 
-    var upraderBody = generateBody (baseBodies['upgrader'], spawningEnergy);
+    var upgraderBody = generateBody (baseBodies['upgrader'], spawningEnergy);
     if (upgraderBody.length)
     {
-        spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 100, upraderBody);
+        spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 100, upgraderBody);
     }
     
     var builderBody = generateBody (baseBodies['builder'], spawningEnergy);
