@@ -43,18 +43,36 @@ module.exports = function (creep)
 {
 	if(creep.carry.energy < creep.carryCapacity) 
     {
-        var sources = creep.room.find(FIND_SOURCES);
-        if (sources.length) 
+        var targetSource = null;
+        
+        // If this creep knows the source to harvest
+        if (creep.memory.harvestFrom)
         {
-            var targetSource = findUnoccupiedSource(sources);
-            if (targetSource) 
-            {
-                // Say that this creep will operate this source
-                Memory.sources[targetSource.id]++;
-                creep.moveTo(targetSource);
-                creep.harvest(targetSource);
+            targetSource = Game.getObjectById (creep.memory.harvestFrom);
+        }
+        // If not, find a source to harvest
+        else
+        {
+            var sources = creep.room.find(FIND_SOURCES);
+            
+            if (sources.length) 
+            { 
+                targetSource = findUnoccupiedSource(sources);
+                
+                if (targetSource) 
+                {
+                    // Say that this creep will operate this source
+                    Memory.sources[targetSource.id]++;
+                    // Remember the target
+                    creep.memory.harvestFrom = targetSource.id;
+                }
             }
-
+        }
+        
+        if (targetSource)
+        {
+            creep.moveTo(targetSource);
+            creep.harvest(targetSource);
         }
     }
     else 
