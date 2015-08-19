@@ -139,8 +139,9 @@ function calculateCost (parts)
     var cost = 0;
     console.log ("----------------");
     console.log ("Evaluating cost:");
-    for (var part in parts)
+    for (var i in parts)
     {
+        var part = parts[i];
         console.log (part);
         if (COST[part])
         {
