@@ -14,8 +14,8 @@ function getNameByRole(spawn, role)
     
     return 
     {
-        name : spawn.room.name + 'X' + role + 'X' + creepIndex,
-        index : creepIndex
+        name : spawn.room.name + 'X' + role + 'X' + creepIndex//,
+        //index : creepIndex
     };
 }
 
@@ -60,10 +60,14 @@ function checkCreepSupply(spawn, role, creeps, desiredAmount, parts)
 {
 
     if (spawn.spawning) 
+    {
         return;
+    }
     
     if (!spawn.memory.queue) 
+    {
         spawn.memory.queue = [];
+    }
       
     // num of creeps in the room 
     var inRoom = creeps[role] ? creeps[role].length : 0;
@@ -89,7 +93,9 @@ function spawnCreepEvery(spawn, role, interval, stagger, parts)
     if ((Game.time - stagger) % interval == 0 && countInQueue(spawn, role) == 0)
     {
         if (!spawn.memory.queue) 
+        {
             spawn.memory.queue = [];
+        }
         spawn.memory.queue.push([role, parts]);
     }
 }
@@ -103,7 +109,7 @@ function spawnFromQueue(spawn)
     if (spawn.spawning) 
         return;
     // Nothing to create, queue's empty
-    if (!spawn.memory.queue.length) 
+    if (!spawn.memory.queue || !spawn.memory.queue.length) 
         return;
     // Creation process started successfully
     if (createByRole(spawn, spawn.memory.queue[0][0], spawn.memory.queue[0][1]))
@@ -233,16 +239,16 @@ module.exports = function (spawn)
     var spawningEnergy = totalEnergy;
     
     var harvesterBody = generateBody (baseBodies['harvester'], spawningEnergy);
-    var guardBody = generateBody (baseBodies['guard'], spawningEnergy);
+    var guardBody =     generateBody (baseBodies['guard'],     spawningEnergy);
 
     spawnCreepEvery  (spawn, 'harvester', Math.round(LIFETIME / 6), 0, harvesterBody);
-    checkCreepSupply (spawn, 'harvester', roleCreeps, 1, harvesterBody);
+    checkCreepSupply (spawn, 'harvester', roleCreeps,               1, harvesterBody);
 
     spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 100, generateBody (baseBodies['upgrader'], spawningEnergy));
-    spawnCreepEvery (spawn, 'builder', LIFETIME / 2, 200, generateBody (baseBodies['builder'], spawningEnergy));
+    spawnCreepEvery (spawn, 'builder',  LIFETIME / 2, 200, generateBody (baseBodies['builder'],  spawningEnergy));
     
     // Make number of guards and number of enemies in the room match
-    var targets = spawn.room.find(FIND_HOSTILE_CREEPS);
+    var targets = spawn.room.find (FIND_HOSTILE_CREEPS);
     var min = targets.length < 1 ? 1 : targets.length;
     checkCreepSupply (spawn, 'guard', roleCreeps, min, guardBody);
 
@@ -258,8 +264,8 @@ module.exports = function (spawn)
     if (storages.length >= 1) 
     {
         var tankerBody = generateBody (baseBodies['tanker'], spawningEnergy);
-        checkCreepSupply (spawn, 'tanker', roleCreeps, 1, tankerBody);
-        spawnCreepEvery (spawn, 'tanker', LIFETIME / 2, 400, tankerBody);
+        checkCreepSupply (spawn, 'tanker', roleCreeps,   1,   tankerBody);
+        spawnCreepEvery  (spawn, 'tanker', LIFETIME / 2, 400, tankerBody);
     }
 
     spawnFromQueue (spawn);
