@@ -256,13 +256,13 @@ module.exports = function (spawn)
     var upgraderBody = generateBody (baseBodies['upgrader'], spawningEnergy);
     if (upgraderBody.length)
     {
-        spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 100, upgraderBody);
+        spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 600, upgraderBody);
     }
     
     var builderBody = generateBody (baseBodies['builder'], spawningEnergy);
     if (builderBody.length)
     {
-        spawnCreepEvery (spawn, 'builder',  LIFETIME / 2, 200, builderBody);
+        spawnCreepEvery (spawn, 'builder',  LIFETIME / 2, 500, builderBody);
     }
     
 
