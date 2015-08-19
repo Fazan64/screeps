@@ -51,8 +51,8 @@ function pushToQueue (spawn, creepSpecs)
     }
     
     console.log ("Creep pushed to production queue:");
-    console.log ('  role: ' + creepSpecs.role );
-    console.log ('  body: ' + creepSpecs.parts);
+    console.log ('  role: ' + creepSpecs [0]);
+    console.log ('  body: ' + creepSpecs [1]);
     
     spawn.memory.queue.push (creepSpecs);
 }
