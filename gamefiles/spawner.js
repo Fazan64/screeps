@@ -249,13 +249,22 @@ module.exports = function (spawn)
     var spawningEnergy = totalEnergy;
     
     var harvesterBody = generateBody (baseBodies['harvester'], spawningEnergy);
-    var guardBody =     generateBody (baseBodies['guard'],     spawningEnergy);
     
     spawnCreepEvery  (spawn, 'harvester', Math.round(LIFETIME / 6), 0, harvesterBody);
     checkCreepSupply (spawn, 'harvester', roleCreeps,               3, harvesterBody);
 
-    spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 100, generateBody (baseBodies['upgrader'], spawningEnergy));
-    spawnCreepEvery (spawn, 'builder',  LIFETIME / 2, 200, generateBody (baseBodies['builder'],  spawningEnergy));
+    var upraderBody = generateBody (baseBodies['upgrader'], spawningEnergy);
+    if (upgraderBody.length)
+    {
+        spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 100, upraderBody);
+    }
+    
+    var builderBody = generateBody (baseBodies['builder'], spawningEnergy);
+    if (builderBody.length)
+    {
+        spawnCreepEvery (spawn, 'builder',  LIFETIME / 2, 200, builderBody);
+    }
+    
 
     // Find all storages in the room
     var storages = spawn.room.find(FIND_MY_STRUCTURES, {
@@ -269,14 +278,21 @@ module.exports = function (spawn)
     if (storages.length >= 1) 
     {
         var tankerBody = generateBody (baseBodies['tanker'], spawningEnergy);
-        checkCreepSupply (spawn, 'tanker', roleCreeps,   1,   tankerBody);
-        spawnCreepEvery  (spawn, 'tanker', LIFETIME / 2, 400, tankerBody);
+        if (tankerBody.length)
+        {
+            checkCreepSupply (spawn, 'tanker', roleCreeps,   1,   tankerBody);
+            spawnCreepEvery  (spawn, 'tanker', LIFETIME / 2, 400, tankerBody);
+        }
     }
     
-    // Make number of guards and number of enemies in the room match
-    var targets = spawn.room.find (FIND_HOSTILE_CREEPS);
-    var min = targets.length < 1 ? 1 : targets.length;
-    checkCreepSupply (spawn, 'guard', roleCreeps, min, guardBody);
+    var guardBody = generateBody (baseBodies['guard'], spawningEnergy);
+    if (guardBody.length)
+    {
+        // Make number of guards and number of enemies in the room match
+        var targets = spawn.room.find (FIND_HOSTILE_CREEPS);
+        var min = targets.length < 1 ? 1 : targets.length;
+        checkCreepSupply (spawn, 'guard', roleCreeps, min, guardBody);
+    }
 
     spawnFromQueue (spawn);
 }
