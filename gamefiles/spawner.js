@@ -28,12 +28,14 @@ function createByRole (spawn, role, parts)
 {
     var creepInfo = getNameByRole(spawn, role);
     
+    var spawnOutput = spawn.createCreep(parts, creepInfo.name, { role: role, index: creepInfo.index })
     // If spawning process started succesfully
-    if (spawn.createCreep(parts, creepInfo.name, { role: role, index: creepInfo.index }) == creepInfo.name)
+    if (spawnOutput == creepInfo.name)
     {
         console.log("Spawning " + role + ": " + creepInfo.name);
         return true;
     }
+    console.log ("Couldn't spawn a creep, error: " + spawnOutput);
     return false;
 }
 
