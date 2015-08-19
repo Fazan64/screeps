@@ -12,11 +12,12 @@ function getNameByRole(spawn, role)
         creepIndex++;
     }
     
-    return 
+    var answer =  
     {
-        name : spawn.room.name + 'X' + role + 'X' + creepIndex//,
-        //index : creepIndex
+        name : spawn.room.name + 'X' + role + 'X' + creepIndex,
+        index : creepIndex
     };
+    return answer;
 }
 
 /**
