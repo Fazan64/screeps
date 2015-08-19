@@ -137,8 +137,6 @@ COST[TOUGH]         = 10;
 function calculateCost (parts)
 {
     var cost = 0;
-    console.log ("----------------");
-    console.log ("Evaluating cost:");
     for (var i in parts)
     {
         var part = parts[i];
@@ -148,8 +146,6 @@ function calculateCost (parts)
             cost += COST[part];
         }
     }
-    console.log ("Evaluated cost: " + cost);
-    console.log ("----------------");
     return cost;
 }
 
@@ -186,9 +182,11 @@ function generateBody (baseParts, maxEnergy)
         finalBody = finalBody.concat (baseBody);
     }
     
-    //console.log ('baseBody cost: ' + calculateCost(baseBody));
-    //console.log ('maximum energy: '+ maxEnergy);
-    //console.log (finalBody);
+    console.log ('---------------');
+    console.log ('baseBody cost: '  + calculateCost(baseBody));
+    console.log ('maximum energy: ' + maxEnergy);
+    console.log ('finalBody: '      + finalBody);
+    console.log ('---------------');
     return finalBody;
 }
 
@@ -246,11 +244,6 @@ module.exports = function (spawn)
 
     spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 100, generateBody (baseBodies['upgrader'], spawningEnergy));
     spawnCreepEvery (spawn, 'builder',  LIFETIME / 2, 200, generateBody (baseBodies['builder'],  spawningEnergy));
-    
-    // Make number of guards and number of enemies in the room match
-    var targets = spawn.room.find (FIND_HOSTILE_CREEPS);
-    var min = targets.length < 1 ? 1 : targets.length;
-    checkCreepSupply (spawn, 'guard', roleCreeps, min, guardBody);
 
     // Find all storages in the room
     var storages = spawn.room.find(FIND_MY_STRUCTURES, {
@@ -267,6 +260,11 @@ module.exports = function (spawn)
         checkCreepSupply (spawn, 'tanker', roleCreeps,   1,   tankerBody);
         spawnCreepEvery  (spawn, 'tanker', LIFETIME / 2, 400, tankerBody);
     }
+    
+    // Make number of guards and number of enemies in the room match
+    var targets = spawn.room.find (FIND_HOSTILE_CREEPS);
+    var min = targets.length < 1 ? 1 : targets.length;
+    checkCreepSupply (spawn, 'guard', roleCreeps, min, guardBody);
 
     spawnFromQueue (spawn);
 }
