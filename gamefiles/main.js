@@ -36,7 +36,7 @@ for (var name in Game.creeps)
 
 var spawner = require ('spawner');
 
-for (var spawn in Game.spawns) 
+for (var name in Game.spawns) 
 {
-    spawner (spawn);
+    spawner (Game.spawns[name]);
 }
