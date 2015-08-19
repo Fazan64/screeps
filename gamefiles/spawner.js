@@ -256,13 +256,20 @@ module.exports = function (spawn)
     var upgraderBody = generateBody (baseBodies['upgrader'], spawningEnergy);
     if (upgraderBody.length)
     {
-        spawnCreepEvery (spawn, 'upgrader', LIFETIME / 2, 600, upgraderBody);
+        spawnCreepEvery  (spawn, 'upgrader', LIFETIME / 2, 600, upgraderBody);
+        checkCreepSupply (spawn, 'upgrader', roleCreeps,   1,   upgraderBody);
     }
     
-    var builderBody = generateBody (baseBodies['builder'], spawningEnergy);
-    if (builderBody.length)
+    // If the room controller is advanced enough
+    // to support buildings, care about builder creeps
+    if (spawn.room.controller.level >= 2)
     {
-        spawnCreepEvery (spawn, 'builder',  LIFETIME / 2, 500, builderBody);
+        var builderBody = generateBody (baseBodies['builder'], spawningEnergy);
+        if (builderBody.length)
+        {
+            spawnCreepEvery  (spawn, 'builder', LIFETIME / 2, 500, builderBody);
+            checkCreepSupply (spawn, 'builder', roleCreeps,   1,   builderBody);
+        }
     }
     
 
