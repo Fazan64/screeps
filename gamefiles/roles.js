@@ -2,7 +2,7 @@ module.exports =
 {
     "harvester" : 
     {
-        behaviour : require ('harvester')
+        behaviour : require ('creep_harvester')
     },
     
     "guard" : 
