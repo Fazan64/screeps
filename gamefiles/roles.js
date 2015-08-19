@@ -13,8 +13,10 @@ function findUnoccupiedSource (sources)
     
     var leastCrowdedSource = null;
     var minOccupants = 9999;
-    for (var source in sources)
+    
+    for (var i in sources)
     {
+        var source = sources [i];
         // Memory.sources [source.id] holds a number of harvesters
         // operating the source with such id
         if (!Memory.sources [source.id])
