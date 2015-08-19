@@ -137,6 +137,7 @@ COST[TOUGH]         = 10;
 function calculateCost (parts)
 {
     var cost = 0;
+    console.log ("----------------");
     console.log ("Evaluating cost:");
     for (var part in parts)
     {
