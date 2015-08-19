@@ -154,7 +154,7 @@ var MAX_PARTS = 30;
 function generateBody (baseParts, maxEnergy)
 {
     var baseBody = [];
-    baseBody.push (baseParts);
+    baseBody = baseBody.concat (baseParts);
     
     // Add enougn MOVE parts to let it move at half the max speed
     for (var i = 0; i < baseParts.length / 2; i++) 
@@ -179,7 +179,7 @@ function generateBody (baseParts, maxEnergy)
     var finalBody = [];
     for (var i = 0; i < times; i++) 
     {
-        finalBody.push (baseBody);
+        finalBody = finalBody.concat (baseBody);
     }
     
     console.log ('baseBody cost: ' + calculateCost(baseBody));
