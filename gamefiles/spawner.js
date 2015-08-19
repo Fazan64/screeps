@@ -41,6 +41,23 @@ function createByRole (spawn, role, parts)
 }
 
 /**
+ * Adds 'creepSpecs' ([role, parts]) to Spawn 'spawn's production queue
+ */
+function pushToQueue (spawn, creepSpecs)
+{
+    if (!spawn.memory.queue)
+    {
+        spawn.memory.queue = [];
+    }
+    
+    console.log ("Creep pushed to production queue:");
+    console.log ('  role: ' + creepSpecs.role );
+    console.log ('  body: ' + creepSpecs.parts);
+    
+    spawn.memory.queue.push (creepSpecs);
+}
+
+/**
  * Returns how many (integer) creeps with memory.role 'role'
  * are already in Spawn "spawn"'s creation queue 
  */ 
@@ -50,7 +67,10 @@ function countInQueue(spawn, role)
     for (var i in spawn.memory.queue)
     {
         var creepSpec = spawn.memory.queue[i];
-        if (creepSpec[0] == role) inQueue++;
+        if (creepSpec[0] == role)
+        {
+            inQueue++;
+        }
     }
     return inQueue;
 }
@@ -78,10 +98,10 @@ function checkCreepSupply(spawn, role, creeps, desiredAmount, parts)
     // num of creeps scheduled for creation
     var inQueue = countInQueue(spawn, role);
     // adds creeps to the queue until the total of in room 
-    // and in queue reaches the desired quantity
+    // and in queue reaches the desired amount of creeps
     while (inRoom + inQueue < desiredAmount) 
     {
-        spawn.memory.queue.push([role, parts]);
+        pushToQueue (spawn, [role, parts]);
         inQueue++;
     }
     
@@ -96,11 +116,7 @@ function spawnCreepEvery(spawn, role, interval, stagger, parts)
 {
     if ((Game.time - stagger) % interval == 0 && countInQueue(spawn, role) == 0)
     {
-        if (!spawn.memory.queue) 
-        {
-            spawn.memory.queue = [];
-        }
-        spawn.memory.queue.push([role, parts]);
+        pushToQueue (spawn, [role, parts]);
     }
 }
 
