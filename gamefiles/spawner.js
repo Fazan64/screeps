@@ -148,6 +148,8 @@ function calculateCost (parts)
             cost += COST[part];
         }
     }
+    console.log ("Evaluated cost: " + cost);
+    console.log ("----------------");
     return cost;
 }
 
