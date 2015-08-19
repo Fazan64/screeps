@@ -140,7 +140,6 @@ function calculateCost (parts)
     for (var i in parts)
     {
         var part = parts[i];
-        console.log (part);
         if (COST[part])
         {
             cost += COST[part];
