@@ -23,7 +23,6 @@ function findUnoccupiedSource (sources)
         {
             console.log ("No memory about a source " + source + ". Creating...");
             Memory.sources [source.id] = 0;
-            return source;
         }
         if (Memory.sources [source.id] < MAX_HARVESTERS_PER_SOURCE) 
         {
