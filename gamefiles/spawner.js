@@ -186,9 +186,9 @@ function generateBody (baseParts, maxEnergy)
         finalBody = finalBody.concat (baseBody);
     }
     
-    console.log ('baseBody cost: ' + calculateCost(baseBody));
-    console.log ('maximum energy: '+ maxEnergy);
-    console.log (finalBody);
+    //console.log ('baseBody cost: ' + calculateCost(baseBody));
+    //console.log ('maximum energy: '+ maxEnergy);
+    //console.log (finalBody);
     return finalBody;
 }
 
@@ -237,6 +237,9 @@ module.exports = function (spawn)
     
     var harvesterBody = generateBody (baseBodies['harvester'], spawningEnergy);
     var guardBody =     generateBody (baseBodies['guard'],     spawningEnergy);
+    
+    console.log ("Harvester body: ");
+    console.log (harvesterBody);
 
     spawnCreepEvery  (spawn, 'harvester', Math.round(LIFETIME / 6), 0, harvesterBody);
     checkCreepSupply (spawn, 'harvester', roleCreeps,               1, harvesterBody);
