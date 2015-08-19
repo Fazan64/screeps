@@ -197,11 +197,11 @@ function generateBody (baseParts, maxEnergy)
         finalBody = finalBody.concat (baseBody);
     }
     
-    console.log ('---------------');
-    console.log ('baseBody cost: '  + calculateCost(baseBody));
-    console.log ('maximum energy: ' + maxEnergy);
-    console.log ('finalBody: '      + finalBody);
-    console.log ('---------------');
+    //console.log ('---------------');
+    //console.log ('baseBody cost: '  + calculateCost(baseBody));
+    //console.log ('maximum energy: ' + maxEnergy);
+    //console.log ('finalBody: '      + finalBody);
+    //console.log ('---------------');
     return finalBody;
 }
 
