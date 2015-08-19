@@ -21,20 +21,21 @@ function getNameByRole(spawn, role)
 }
 
 /**
- * 
- *Makes a Spawn 'spawn' create a Creep with memory.role 'role' and bodyparts 'parts' 
+ * Makes a Spawn 'spawn' create a Creep with memory.role 'role' and bodyparts 'parts' 
  */
 function createByRole (spawn, role, parts)
 {
     var creepInfo = getNameByRole(spawn, role);
     
     var spawnOutput = spawn.createCreep(parts, creepInfo.name, { role: role, index: creepInfo.index })
+    
     // If spawning process started succesfully
     if (spawnOutput == creepInfo.name)
     {
         console.log("Spawning " + role + ": " + creepInfo.name);
         return true;
     }
+    
     console.log ("Couldn't spawn a creep, error: " + spawnOutput);
     return false;
 }
@@ -133,11 +134,13 @@ COST[TOUGH]         = 10;
 /**
  * Calculates the energy cost of a Creep with bodyparts 'parts' 
  */
-function CalculateCost (parts)
+function calculateCost (parts)
 {
     var cost = 0;
+    console.log ("Evaluating cost:");
     for (var part in parts)
     {
+        console.log (part);
         if (COST[part])
         {
             cost += COST[part];
@@ -160,7 +163,7 @@ function generateBody (baseParts, maxEnergy)
     }
     
     // How many baseBodys we can produce with maxEnergy
-    var times = Math.floor (maxEnergy / CalculateCost(baseBody));
+    var times = Math.floor (maxEnergy / calculateCost(baseBody));
     
     // If there are more parts than maximum, lower the 'times' accordingly
     if (times * baseBody.length > MAX_PARTS)
@@ -179,18 +182,11 @@ function generateBody (baseParts, maxEnergy)
         finalBody.push (baseBody);
     }
     
+    console.log ('baseBody cost: ' + calculateCost(baseBody));
+    console.log ('maximum energy: '+ maxEnergy);
+    console.log (finalBody);
     return finalBody;
 }
-
-var TANKER_BODY = [MOVE, CARRY, CARRY, MOVE];
-var BIG_TANKER_BODY = [MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE];
-var BIGGER_TANKER_BODY = [MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE, CARRY, CARRY, MOVE];
-
-var WORKER_BODY = [MOVE, WORK, CARRY, MOVE];
-var BIG_WORKER_BODY = [MOVE, WORK, CARRY, MOVE, WORK, CARRY, MOVE];
-var BIGGER_WORKER_BODY = [MOVE, WORK, CARRY, MOVE, WORK, CARRY, MOVE, WORK, CARRY, MOVE];
-
-var GUARD_BODY = [MOVE, TOUGH, TOUGH, MOVE, ATTACK, MOVE];
 
 /** 
  * Makes Spawn 'spawn' perform spawner behaviour
@@ -216,6 +212,7 @@ module.exports = function (spawn)
 
     // Get total energy usable in Creep creation
     var totalEnergy = spawn.energy;
+    
     // Find all extensions
     var extensions = spawn.room.find(FIND_MY_STRUCTURES, {
         filter: function (s) 
@@ -229,16 +226,9 @@ module.exports = function (spawn)
         totalEnergy += extensions[i].energy;
     }
     
-    // Choose body types according to energy levels
-    //var workerBody = totalEnergy > 750 ? BIGGER_WORKER_BODY
-    //    : totalEnergy > 450 ? BIG_WORKER_BODY
-    //        : WORKER_BODY;
-    //var tankerBody = totalEnergy > 500 ? BIGGER_TANKER_BODY
-    //    : totalEnergy > 350 ? BIG_TANKER_BODY
-    //        : TANKER_BODY;
-    
     var baseBodies = require ('baseBodies');
-    // max energy a single creep may cost
+    
+    // Max energy a single creep may cost
     var spawningEnergy = totalEnergy;
     
     var harvesterBody = generateBody (baseBodies['harvester'], spawningEnergy);
