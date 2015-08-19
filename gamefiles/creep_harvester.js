@@ -8,7 +8,7 @@ function findUnoccupiedSource (sources)
 {
     if (!Memory.sources)
     {
-        Memory.sources = [];
+        Memory.sources = {};
     }
     
     var leastCrowdedSource = null;
@@ -19,13 +19,15 @@ function findUnoccupiedSource (sources)
         var source = sources [i];
         // Memory.sources [source.id] holds a number of harvesters
         // operating the source with such id
-        if (!Memory.sources [source.id])
+        if (Memory.sources [source.id] === undefined)
         {
+            console.log ("No memory about a source " + source + ". Creating...");
             Memory.sources [source.id] = 0;
             return source;
         }
         if (Memory.sources [source.id] < MAX_HARVESTERS_PER_SOURCE) 
         {
+            console.log ("Found vacant source: " + source);
             return source;
         }
         if (Memory.sources [source.id] < minOccupants) 
