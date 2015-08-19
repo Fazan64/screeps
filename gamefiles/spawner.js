@@ -160,10 +160,10 @@ function generateBody (baseParts, maxEnergy)
     var baseBody = [];
     baseBody = baseBody.concat (baseParts);
     
-    // Add enougn MOVE parts to let it move at half the max speed
+    // Add enough MOVE parts to let it move at half the max speed
     for (var i = 0; i < baseParts.length / 2; i++) 
     {
-        baseBody.push(MOVE);
+        baseBody.push (MOVE);
     }
     
     // How many baseBodys we can produce with maxEnergy
