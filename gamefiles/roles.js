@@ -12,6 +12,10 @@ module.exports =
             var targets = creep.room.find(FIND_HOSTILE_CREEPS).filter (function (creep) { return creep.owner.username != "Source Keeper" });
         	if(targets.length >= 1)
         	{
+                targets.sort (function (a,b)
+                {
+                    return creep.getRangeTo (b) - creep.getRangeTo (a);      
+                });
         		creep.moveTo(targets[0]);
         		creep.attack(targets[0]);
         	}
@@ -25,6 +29,10 @@ module.exports =
             var targets = creep.room.find(FIND_HOSTILE_CREEPS).filter (function (creep) { return creep.owner.username != "Source Keeper" });
         	if(targets.length >= 1)
         	{
+                targets.sort (function (a,b)
+                {
+                    return creep.getRangeTo (b) - creep.getRangeTo (a);      
+                });
         	    
         	    if (creep.pos.getRangeTo (targets[0].pos) > 3)
         	    {
