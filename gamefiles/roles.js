@@ -14,7 +14,7 @@ module.exports =
         	{
                 targets.sort (function (a,b)
                 {
-                    return creep.pos.getRangeTo (b) - creep.pos.getRangeTo (a);      
+                    return creep.pos.getRangeTo (a) - creep.pos.getRangeTo (b);      
                 });
         		creep.moveTo(targets[0]);
         		creep.attack(targets[0]);
@@ -31,7 +31,7 @@ module.exports =
         	{
                 targets.sort (function (a,b)
                 {
-                    return creep.pos.getRangeTo (b) - creep.pos.getRangeTo (a);      
+                    return creep.pos.getRangeTo (a) - creep.pos.getRangeTo (b);      
                 });
         	    
         	    if (creep.pos.getRangeTo (targets[0].pos) > 3)

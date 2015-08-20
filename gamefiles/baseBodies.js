@@ -1,9 +1,3 @@
-/* global HEAL */
-/* global RANGED_ATTACK */
-/* global TOUGH */
-/* global ATTACK */
-/* global CARRY */
-/* global WORK */
 /** Contains the base parts needed for these Creeps to minimally fulfil their roles.
  * Use generateBody in 'spawner' module to get the finalBody configuration.
  * To get base body configurations use role names as hash keys (baseBodies ["harvester"])
